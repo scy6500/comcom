@@ -1,12 +1,11 @@
 FROM node:14
 
-RUN mkdir -p /app
-WORKDIR /app
+WORKDIR /usr/src/comcom
 
-COPY package*.json /app
+COPY package*.json /usr/src/comcom/
 RUN npm install
 
-COPY . /app
+COPY . /usr/src/comcom/
 
 RUN npm run build
 EXPOSE 3000
