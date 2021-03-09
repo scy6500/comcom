@@ -83,12 +83,17 @@ gcloud auth configure-docker
 docker push gcr.io/${PROJECT_ID}/comcom:v2
 ```
 
-4. Create Deployment And Service.
+4. Create Container Cluster
+ ```shell
+gcloud container clusters create comcom-cluster --num-nodes=3 --region=asia-northeast2
+```
+
+5. Create Deployment And Service.
 ```shell
 kubectl apply -f gke-deploy.yaml --record
 ```
 
-5. Check External-Ip  
+6. Check External-Ip  
 ```shell
 NAME                 TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)        AGE
 comcom-gke-service   LoadBalancer   10.3.252.164   34.97.136.28   80:32443/TCP   61s
