@@ -28,29 +28,29 @@ Public으로 공유되어 있는 모델이 아닌 직접 fine-tuning한 모델�
 
 ### 사용법
 1. Build Docker
-'''shell
+```shell
 docker build -t comcom .
-'''
+```
 
 2. Run Docker
-'''shell
+```shell
 docker run -d -p 3000:3000 comcom
-'''
+```
 
 3. Create Deployment
-'''shell
+```shell
 kubectl create -f deploy.yaml
-'''
+```
 
 4. Expose The Deployment
-'''shell
+```shell
 kubectl expose deployment comcom-deployment --type="LoadBalancer"
-'''
+```
 
 5. Check External-Ip 
-'''shell
+```shell
 C:\Users\user\Desktop\comcom>kubectl get svc
 NAME                TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE
 comcom-deployment   LoadBalancer   10.105.239.103   192.168.99.101   3000:30828/TCP   7s
 kubernetes          ClusterIP      10.96.0.1        <none>           443/TCP          63m
-'''
+```
