@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: comcom
-        image: yeop2/comcom:v1
+        image: yeop2/comcom:v2
         ports:
         - containerPort: 3000
