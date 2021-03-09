@@ -37,20 +37,30 @@ docker build -t comcom .
 docker run -d -p 3000:3000 comcom
 ```
 
-3. Create Deployment
+3. Activate Metallb
+```shell
+minikube addons enable metallb
+```
+
+4. Create Deployment
 ```shell
 kubectl create -f deploy.yaml
 ```
 
-4. Expose The Deployment
+5. Create Config Map 
+```shell
+kubectl create -f configmap.yaml
+```
+
+6. Expose The Deployment
 ```shell
 kubectl expose deployment comcom-deployment --type="LoadBalancer"
 ```
 
-5. Check External-Ip 
+7. Check External-Ip 
 ```shell
 C:\Users\user\Desktop\comcom>kubectl get svc
 NAME                TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE
-comcom-deployment   LoadBalancer   10.105.239.103   192.168.99.101   3000:30828/TCP   7s
+comcom-deployment   LoadBalancer   10.105.239.103   <Minikube ip>    3000:30828/TCP   7s
 kubernetes          ClusterIP      10.96.0.1        <none>           443/TCP          63m
 ```
