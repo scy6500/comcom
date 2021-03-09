@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comcom-gke-deployment
+spec:
+  selector:
+    matchLabels:
+      app: comcom
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: comcom
+        env: development
+    spec:
+      containers:
+      - name: comcom
+        image: yeop2/comcom:v2
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: LOG_LEVEL
+          value: "info"
+        - name: NODE_ENV
+          value: "development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comcom-gke-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: comcom
