@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comcom-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: comcom
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: comcom
+        tier: app
+    spec:
+      containers:
+      - name: comcom
+        image: yeop2/comcom:v1
+        ports:
+        - containerPort: 3000
