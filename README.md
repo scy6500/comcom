@@ -64,3 +64,33 @@ NAME                TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)    
 comcom-deployment   LoadBalancer   10.105.239.103   <Minikube ip>    3000:30828/TCP   7s
 kubernetes          ClusterIP      10.96.0.1        <none>           443/TCP          63m
 ```
+
+### GCP에서 사용법
+1. Git Clone
+```shell
+git clone https://github.com/scy6500/comcom.git
+```
+
+2. Build Image
+```shell
+export PROJECT_ID="$(gcloud config get-value project -q)"
+docker build -t gcr.io/${PROJECT_ID}/comcom:v2
+```
+
+3. Upload Image To Container Registry
+```shell
+gcloud auth configure-docker
+docker push gcr.io/${PROJECT_ID}/comcom:v2
+```
+
+4. Create Deployment And Service.
+```shell
+kubectl apply -f gke-deploy.yaml --record
+```
+
+5. Check External-Ip  
+```shell
+NAME                 TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)        AGE
+comcom-gke-service   LoadBalancer   10.3.252.164   34.97.136.28   80:32443/TCP   61s
+kubernetes           ClusterIP      10.3.240.1     <none>         443/TCP        78m
+```
